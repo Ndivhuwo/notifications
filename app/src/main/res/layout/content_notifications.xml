@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.alogorithms.smart.nofications.wba_notifications"
+    tools:showIn="@layout/activity_notifications"
+    android:weightSum="1"
+    android:scrollY="@dimen/fab_margin"
+    android:background="@drawable/bg3">
+
+
+    <EditText
+        android:layout_width="347dp"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:hint="@string/text_hint"
+        android:textColor="#ffffff"
+        android:textColorHint="#ffffff"
+        android:layout_marginTop="30dp"/>
+
+    <ImageView
+        android:contentDescription="@string/img_text"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/imageView"/>
+
+
+    <!--<LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">-->
+
+        <!--<TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/not_type_text_value"
+                style="@style/DescriptionText"
+                android:id="@+id/not_type_textView"
+                android:layout_marginTop="10dp"/>-->
+
+    <!--    <Spinner
+                android:layout_width="182dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/spinner"
+                android:spinnerMode="dialog"
+                android:divider="#8D8D8D"
+                android:dividerHeight="1dp"
+                android:layout_marginStart="20dp"
+                android:layout_gravity="bottom" />-->
+        <Spinner
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:id="@+id/spinner"
+            android:prompt="@string/notification_type"
+            android:entries="@array/report_type" />
+    <!--</LinearLayout>-->
+
+
+    <!--<LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="333dp"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loc_text"
+            style="@style/DescriptionText"
+            android:layout_marginTop="10dp"
+            android:id="@+id/textView" />
+
+
+
+    </LinearLayout>-->
+
+    <!--ToggleButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/phone_number_button_text"
+        android:id="@+id/phone_number"
+        android:layout_marginTop="42dp"
+        android:layout_gravity="center_horizontal"
+        android:textOn="Phone number ON"
+        android:textOff="Phone number OFF"/-->
+    <!--<Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/map_button_text"
+        android:id="@+id/loc_map_button"
+        android:layout_marginTop="42dp"
+        android:layout_gravity="center_horizontal" />-->
+
+</LinearLayout>

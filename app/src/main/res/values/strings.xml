@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">nofications</string>
+    <string name="action_settings">Settings</string>
+    <string name="app_title" >notifications</string>
+    <string name="text_hint">Enter message</string>
+    <string name="videoButt_text">Attach Video</string>
+    <string name="imageButt_text">Attach Image</string>
+    <string name="not_type_text_value">Notification type: </string>
+    <string name="send_button_text">Send notification</string>
+    <string name="map_button_text">Add location</string>
+    <string name="phone_number_button_text">Add Phone number</string>
+    <string name="pick_image_intent_text">Please select</string>
+    <string name="location_text">location</string>
+    <string name="loc_text">Add current location</string>
+    <string name="img_text">image to send</string>
+    <string name="notification_type">Notification type</string>
+    <string-array name="report_type">
+        <item>Crime</item>
+        <item>Municipal</item>
+        <item>Accident</item>
+        <item>Fraud/Bribery</item>
+    </string-array>
+</resources>
