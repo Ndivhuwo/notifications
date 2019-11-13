@@ -44,7 +44,7 @@
                 android:layout_marginRight="10dp"
                 android:id="@+id/imageButt"
                 android:background="@android:color/transparent"
-
+                android:tint="@color/colorWhite"
                 android:layout_weight="0.13" />
             <!--ImageButton
                 style="?android:attr/buttonStyleSmall"

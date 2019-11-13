@@ -1,3 +1,4 @@
+/*
 package com.alogorithms.smart.nofications;
 
 import android.app.ProgressDialog;
@@ -27,9 +28,11 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
+*/
 /**
  * Created by user on 2016-01-14.
- */
+ *//*
+
 public class PostData extends AsyncTask<String, String, String> {
     String  user_id ="";
     Context context =null;
@@ -76,9 +79,11 @@ public class PostData extends AsyncTask<String, String, String> {
         locate.put("longitude",longitude);
         locate.put("address", address);
         jsonString.put("loc", locate);
-        /*JSONObject txt = new JSONObject();
+        */
+/*JSONObject txt = new JSONObject();
         txt.put("message", text);
-        txt.put("flag", "empty");*/
+        txt.put("flag", "empty");*//*
+
         jsonString.put("message", text);
         jsonString.put("user_id",user_id);
 
@@ -116,9 +121,11 @@ public class PostData extends AsyncTask<String, String, String> {
         locate.put("longitude",longitude);
         locate.put("address", address);
         jsonString.put("loc", locate);
-        /*JSONObject txt = new JSONObject();
+        */
+/*JSONObject txt = new JSONObject();
         txt.put("message", text);
-        txt.put("flag", "empty");*/
+        txt.put("flag", "empty");*//*
+
         jsonString.put("message", text);
         jsonString.put("user_id", user_id);
 
@@ -158,9 +165,11 @@ public class PostData extends AsyncTask<String, String, String> {
             locate.put("longitude",longitude);
             locate.put("address", address);
             jsonString.put("loc", locate);
-            /*JSONObject txt = new JSONObject();
+            */
+/*JSONObject txt = new JSONObject();
             txt.put("message", text);
-            txt.put("flag", "empty");*/
+            txt.put("flag", "empty");*//*
+
             jsonString.put("message", text);
             jsonString.put("user_id",user_id);
             jsonString.put("action","alert");
@@ -233,3 +242,4 @@ public class PostData extends AsyncTask<String, String, String> {
 
     }
 }
+*/

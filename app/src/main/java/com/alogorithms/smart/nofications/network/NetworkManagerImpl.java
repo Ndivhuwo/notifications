@@ -1,21 +1,13 @@
 package com.alogorithms.smart.nofications.network;
 
-import android.graphics.Bitmap;
-import android.util.Base64;
-
 import com.alogorithms.smart.nofications.Constants;
 import com.alogorithms.smart.nofications.model.Alert;
 import com.alogorithms.smart.nofications.model.FileObj;
 import com.alogorithms.smart.nofications.network.contract.NetworkManager;
 import com.alogorithms.smart.nofications.network.service.NetworkService;
 
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONObject;
-
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -24,7 +16,7 @@ import retrofit2.Response;
 
 public class NetworkManagerImpl implements NetworkManager {
 
-    final NetworkService networkService;
+    private final NetworkService networkService;
 
     public NetworkManagerImpl(NetworkService networkService) {
         this.networkService = networkService;

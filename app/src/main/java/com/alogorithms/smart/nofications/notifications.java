@@ -19,7 +19,6 @@ import com.alogorithms.smart.nofications.model.Alert;
 import com.alogorithms.smart.nofications.network.NetworkManagerImpl;
 import com.alogorithms.smart.nofications.network.contract.NetworkManager;
 import com.alogorithms.smart.nofications.network.service.NetworkService;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.nguyenhoanglam.imagepicker.model.Config;
