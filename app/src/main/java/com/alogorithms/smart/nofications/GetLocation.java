@@ -10,8 +10,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.view.View;
+import androidx.core.app.ActivityCompat;
 
 import java.io.IOException;
 import java.util.List;

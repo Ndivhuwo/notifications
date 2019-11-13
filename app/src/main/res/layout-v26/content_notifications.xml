@@ -27,7 +27,8 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp">
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -37,7 +38,6 @@
                 android:id="@+id/editText"
                 android:padding="12dp"
                 android:hint="@string/text_hint"
-                android:layout_marginTop="30dp"
                 android:imeOptions="actionDone"
                 android:autofillHints="Please Help!|Fire!" />
             </com.google.android.material.textfield.TextInputLayout>

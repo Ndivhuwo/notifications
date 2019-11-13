@@ -39,7 +39,8 @@ public class PostData extends AsyncTask<String, String, String> {
     double longitude = 0;
     String address = "";
     Bitmap image = null;
-    public PostData(Context cntxt, String type, String text, double latitude, double longitude, String address, Bitmap image, String user_id) {
+    notifications.PostDataCallBacks postDataCallBacks;
+    public PostData(Context cntxt, String type, String text, double latitude, double longitude, String address, Bitmap image, String user_id, notifications.PostDataCallBacks postDataCallBacks) {
         this.type = type;
         this.text = Base64.encodeToString(text.getBytes(), Base64.DEFAULT);
         //this.text = text.replaceAll("(?=[]\\[+&|!(){}^\"~*?:\\\\-])", "\\\\");
@@ -49,9 +50,10 @@ public class PostData extends AsyncTask<String, String, String> {
         this.image = image;
         this.context = cntxt;
         this.user_id = user_id;
+        this.postDataCallBacks = postDataCallBacks;
     }
 
-    public PostData(Context cntxt, String type, String text, double latitude, double longitude, String address, String mPhoneNumber) {
+    public PostData(Context cntxt, String type, String text, double latitude, double longitude, String address, String mPhoneNumber, notifications.PostDataCallBacks postDataCallBacks) {
         this.type = type;
         this.text = Base64.encodeToString(text.getBytes(), Base64.DEFAULT);
         //this.text = text.replaceAll("(?=[]\\[+&|!(){}^\"~*?:\\\\-])", "\\\\");
@@ -60,6 +62,7 @@ public class PostData extends AsyncTask<String, String, String> {
         this.address = address;
         this.context = cntxt;
         this.user_id = mPhoneNumber;
+        this.postDataCallBacks = postDataCallBacks;
     }
 
     public void send() throws IOException, JSONException {
@@ -215,27 +218,18 @@ public class PostData extends AsyncTask<String, String, String> {
     }
     protected void onPostExecute(String file_url) {
         // dismiss the dialog once product deleted
-        pDialog.dismiss();
+        //postDataCallBacks.dismissDialog();
         if (file_url != null) {
             Toast.makeText(context, file_url, Toast.LENGTH_LONG)
                     .show();
         }
 
     }
-    ProgressDialog pDialog = null;
+
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        pDialog = new ProgressDialog(context);
-        if(image != null){
-            pDialog.setMessage("Uploading Picture");
-        }
-        else{
-            pDialog.setMessage("Uploading Information");
-        }
-        pDialog.setIndeterminate(false);
-        pDialog.setCancelable(true);
-        pDialog.show();
+        //postDataCallBacks.displayDialog();
 
     }
 }
