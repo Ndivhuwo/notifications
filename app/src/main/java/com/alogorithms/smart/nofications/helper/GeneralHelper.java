@@ -1,5 +1,8 @@
 package com.alogorithms.smart.nofications.helper;
 
+import android.content.Context;
+import android.location.LocationManager;
+
 import com.alogorithms.smart.nofications.model.enumaration.AlertType;
 import com.google.gson.TypeAdapter;
 import com.google.gson.stream.JsonReader;
@@ -28,6 +31,29 @@ public class GeneralHelper {
                 return AlertType.CRIME;
 
         }
+    }
+
+    public static boolean isLocationEnabled(Context context) {
+        LocationManager locationManager = null;
+        boolean gps_enabled = false, network_enabled = false;
+
+        //Check GPS provider
+        if (locationManager == null)
+            locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
+        try {
+            gps_enabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //Check network provider
+        try {
+            network_enabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return gps_enabled || network_enabled;
     }
 
     public static class MyDateTypeAdapter2 extends TypeAdapter<Date> {

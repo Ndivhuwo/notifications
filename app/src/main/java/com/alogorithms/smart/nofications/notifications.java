@@ -4,8 +4,10 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -30,6 +32,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import android.telephony.TelephonyManager;
 import android.util.Log;
@@ -104,6 +107,7 @@ public class notifications extends AppCompatActivity implements LocationListener
     ImageView img;
     ListView lv_alert_type_filter;
     String[] alertTypes;
+    GetLocation glct;
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -182,7 +186,28 @@ public class notifications extends AppCompatActivity implements LocationListener
 
         lv_alert_type_filter.setOnItemClickListener(onItemClickListener);
         lv_alert_type_filter.setItemChecked(0, true);
+        LocalBroadcastManager.getInstance(this).registerReceiver(receiver, new IntentFilter("com.alogorithms.smart.nofications.location"));
 
+        if (rxPermissions.isGranted(Manifest.permission.ACCESS_FINE_LOCATION)
+                && rxPermissions.isGranted(Manifest.permission.ACCESS_COARSE_LOCATION)
+        && toggle_b.isChecked()) {
+            startService(NotificationsApp.getLocationIntent());
+        }
+        glct = new GetLocation(myAct);
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        stopService(NotificationsApp.getLocationIntent());
+    }
+
+    @Override
+    protected void onDestroy() {
+        stopService(NotificationsApp.getLocationIntent());
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
+        super.onDestroy();
     }
 
     private AdapterView.OnItemClickListener onItemClickListener = new AdapterView.OnItemClickListener() {
@@ -228,6 +253,11 @@ public class notifications extends AppCompatActivity implements LocationListener
         }
     };
 
+    public void requestLocation() {
+        stopService(NotificationsApp.getLocationIntent());
+        startService(NotificationsApp.getLocationIntent());
+    }
+
     private View.OnClickListener onClickListener = new View.OnClickListener() {
         @SuppressLint("CheckResult")
         @Override
@@ -254,7 +284,26 @@ public class notifications extends AppCompatActivity implements LocationListener
                 case R.id.toggleButton:
                     if (toggle_b.isChecked()) {
 
-                        GetLocation glct = new GetLocation(getApplicationContext(), myAct);
+                        if(!GeneralHelper.isLocationEnabled(notifications.this)) {
+                            Toast.makeText(getApplicationContext(), getString(R.string.sentence_loc_permissions_required), Toast.LENGTH_LONG).show();
+                        } else if (!rxPermissions.isGranted(Manifest.permission.ACCESS_FINE_LOCATION) || !rxPermissions.isGranted(Manifest.permission.ACCESS_COARSE_LOCATION)) {
+                            rxPermissions.request(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION)
+                                    .doOnDispose(() -> Log.i(TAG, "Disposing requestPhonePermissions Single"))
+                                    .subscribe(granted -> {
+                                        toggle_b.setChecked(false);
+                                        if (!granted) {
+                                            Log.i(TAG, "Permissions Not set");
+                                            Toast.makeText(getApplicationContext(), getString(R.string.sentence_location_permissions_required), Toast.LENGTH_LONG).show();
+                                        } else {
+                                            requestLocation();
+                                        }
+                                    });
+                        } else {
+                            toggle_b.setChecked(false);
+                            requestLocation();
+                        }
+
+                        /*GetLocation glct = new GetLocation(getApplicationContext(), myAct);
                         glct.setLocation();
                         longitude = glct.getLongitude();
                         latitude = glct.getLatitude();
@@ -276,7 +325,7 @@ public class notifications extends AppCompatActivity implements LocationListener
                                 toggle_b.setChecked(false);
                             }
 
-                        }
+                        }*/
                     }
                     break;
                 case R.id.send_button:
@@ -332,6 +381,34 @@ public class notifications extends AppCompatActivity implements LocationListener
                     break;
 
             }
+        }
+    };
+
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            Bundle bundle = intent.getExtras();
+
+            if (bundle != null) {
+                toggle_b.setChecked(true);
+                if (latitude == 0 && longitude == 0) {
+
+                    latitude = bundle.getDouble("lat");
+                    longitude = bundle.getDouble("lng");
+                    address = glct.getAddress(latitude, longitude);
+                    Log.i("Broadcast receiver", "lat: " + latitude + " lang: " + longitude);
+                    Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude + "\nAddress: " + address, Toast.LENGTH_LONG).show();
+
+                } else if (longitude != bundle.getDouble("lng") && latitude != bundle.getDouble("lat")) {
+                    latitude = bundle.getDouble("lat");
+                    longitude = bundle.getDouble("lng");
+                    address = glct.getAddress(latitude, longitude);
+                    Log.i("Broadcast receiver", "lat: " + latitude + " lang: " + longitude);
+                    Toast.makeText(getApplicationContext(), "Your Location is - \nLat: " + latitude + "\nLong: " + longitude + "\nAddress: " + address, Toast.LENGTH_LONG).show();
+
+                }
+            }
+
         }
     };
 

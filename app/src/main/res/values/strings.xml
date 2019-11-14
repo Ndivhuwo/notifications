@@ -18,6 +18,8 @@
     <string name="text_gallery_select">Select Image</string>
     <string name="text_done">Done</string>
     <string name="sentence_permissions_required">You need to enable this permission to take a picture</string>
+    <string name="sentence_location_permissions_required">You need to enable this permission to provide the location</string>
+    <string name="sentence_loc_permissions_required">You need to enable location updates for this app</string>
     <string name="text_success">Success!</string>
     <string name="text_failed">Failed</string>
     <string name="text_effortless_base_url">http://ec2\-54\-166\-231\-225.compute-1.amazonaws.com:8091/api/v1/</string>
